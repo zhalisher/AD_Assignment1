@@ -11,11 +11,11 @@ type Book struct {
 	IsBorrowed bool
 }
 
-//type Library struct {
-//	Book map[string]Book
-//}
+type library struct {
+	Book map[string]Book
+}
 
-func library() {
+func Library() {
 	fmt.Println("Welcome to Library Management System application!")
 
 	for loop := true; loop; {

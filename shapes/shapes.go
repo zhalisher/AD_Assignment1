@@ -8,6 +8,7 @@ import (
 type Shape interface {
 	Area() float64
 	Perimeter() float64
+	Name() string
 }
 type Rectangle struct {
 	Length, Width float64
@@ -31,6 +32,9 @@ func (rectangle Rectangle) Area() float64 {
 func (rectangle Rectangle) Perimeter() float64 {
 	return 2 * (rectangle.Length + rectangle.Width)
 }
+func (rectangle Rectangle) Name() string {
+	return "Rectangle"
+}
 
 // func for circle
 func (circle Circle) Area() float64 {
@@ -39,6 +43,9 @@ func (circle Circle) Area() float64 {
 func (circle Circle) Perimeter() float64 {
 	return 2 * math.Pi * circle.Radius
 }
+func (circle Circle) Name() string {
+	return "Circle"
+}
 
 // func for square
 func (square Square) Area() float64 {
@@ -46,6 +53,9 @@ func (square Square) Area() float64 {
 }
 func (square Square) Perimeter() float64 {
 	return 4 * square.Side
+}
+func (square Square) Name() string {
+	return "Square"
 }
 
 // func for triangle
@@ -57,26 +67,25 @@ func (triangle Triangle) Area() float64 {
 		(halfP - triangle.Side2) *
 		(halfP - triangle.Side3))
 }
-func (triagnle Triangle) Perimeter() float64 {
-	return triagnle.Side1 + triagnle.Side2 + triagnle.Side3
+func (triangle Triangle) Perimeter() float64 {
+	return triangle.Side1 + triangle.Side2 + triangle.Side3
+}
+func (triangle Triangle) Name() string {
+	return "Triangle"
 }
 
 func ShapesCLI() {
-	var s Shape
+	shapes := []Shape{
+		Rectangle{Length: 5, Width: 3},
+		Circle{Radius: 4},
+		Square{Side: 4},
+		Triangle{Side1: 3, Side2: 4, Side3: 5},
+	}
+	for _, s := range shapes {
+		fmt.Println("Shape: ", s.Name())
+		fmt.Println("Area of: ", s.Area())
+		fmt.Println("Perimeter", s.Perimeter())
+		fmt.Println("============")
 
-	s = Rectangle{Length: 5, Width: 3}
-	fmt.Println("Rectangle area: ", s.Area())
-	fmt.Println("Rectangle Perimeter:", s.Perimeter())
-
-	s = Circle{Radius: 4}
-	fmt.Println("Circle area", s.Area())
-	fmt.Println("Circle perimeter:", s.Perimeter())
-
-	s = Square{Side: 4}
-	fmt.Println("Square area", s.Area())
-	fmt.Println("Square perimeter:", s.Perimeter())
-
-	s = Triangle{Side1: 3, Side2: 4, Side3: 5}
-	fmt.Println("Triangle area", s.Area())
-	fmt.Println("Triangle perimeter:", s.Perimeter())
+	}
 }

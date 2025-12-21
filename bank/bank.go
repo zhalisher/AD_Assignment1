@@ -7,7 +7,9 @@ type BankAccount struct {
 }
 
 func (account *BankAccount) Deposit(amount int) {
-	account.Balance += amount
+	if amount > 0 {
+		account.Balance += amount
+	}
 }
 func (accoumt *BankAccount) Withdraw(amount int) {
 	if amount > accoumt.Balance {
@@ -20,6 +22,7 @@ func (account *BankAccount) GetBalance() int {
 	return account.Balance
 }
 func BankCLI() {
+	account := &BankAccount{}
 	fmt.Println("Welcome to bank Account Simulation application!")
 
 	for loop := true; loop; {
@@ -38,8 +41,17 @@ func BankCLI() {
 
 		switch choice {
 		case 1:
+			var amount int
+			println("Enter amount of money to deposit")
+			fmt.Scan(&amount)
+			account.Deposit(amount)
 		case 2:
+			var amount int
+			fmt.Println("Enter amount of money to withdraw")
+			fmt.Scan(&amount)
+			account.Withdraw(amount)
 		case 3:
+			fmt.Println(account.GetBalance())
 		case 4:
 			fmt.Println("Exiting from application")
 			loop = false
